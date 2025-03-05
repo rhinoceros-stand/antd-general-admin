@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -10,16 +10,27 @@ import { Button, Layout, Menu, theme } from 'antd'
 
 const { Header, Sider, Content } = Layout
 
-const PageBase: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false)
+type PageBaseProps = {
+  collapsed: boolean
+  onToggleMenu: (collapsed: boolean) => void
+}
+
+const PageBase: React.FC<PageBaseProps> = ({ collapsed, onToggleMenu }) => {
   const {
-    token: { colorBgContainer, borderRadiusLG }
+    token: {
+      colorBgContainer,
+      borderRadiusLG
+    }
   } = theme.useToken()
 
   return (
     <Layout className='h-screen'>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className='h-[32px] bg-stone-600 rounded-md m-[16px]' />
+      <Sider
+        collapsible
+        trigger={null}
+        collapsed={collapsed}
+      >
+        <div className='h-[32px] m-[16px] bg-stone-600 rounded-md' />
         <Menu
           theme='dark'
           mode='inline'
@@ -48,7 +59,7 @@ const PageBase: React.FC = () => {
           <Button
             type='text'
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
+            onClick={() => onToggleMenu(!collapsed)}
             style={{
               fontSize: '16px',
               width: 64,
