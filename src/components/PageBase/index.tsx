@@ -17,9 +17,9 @@ const PageBase: React.FC = () => {
   } = theme.useToken()
 
   return (
-    <Layout>
+    <Layout className='h-screen'>
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className='demo-logo-vertical' />
+        <div className='h-[32px] bg-stone-600 rounded-md m-[16px]' />
         <Menu
           theme='dark'
           mode='inline'
@@ -60,7 +60,6 @@ const PageBase: React.FC = () => {
           style={{
             margin: '24px 16px',
             padding: 24,
-            minHeight: 280,
             background: colorBgContainer,
             borderRadius: borderRadiusLG
           }}
