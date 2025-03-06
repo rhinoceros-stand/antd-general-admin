@@ -1,9 +1,8 @@
 import { create } from 'zustand'
 
 const useAppStore = create((set) => ({
-  sideBarVisible: false,
-  showSideBar: () => set({ sideBarVisible: true }),
-  hideSideBar: () => set({ sideBarVisible: false })
+  collapsed: false,
+  toggleCollapsed: (collapsed: boolean) => set({ collapsed })
 }))
 
 export default useAppStore

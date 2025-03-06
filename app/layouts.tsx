@@ -22,13 +22,11 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
 
   const {
     collapsed,
-    showSideBar,
-    hideSideBar
+    toggleCollapsed,
   } = useAppStore(
     useShallow((state) => ({
-      collapsed: state.sideBarVisible,
-      showSideBar: state.showSideBar,
-      hideSideBar: state.hideSideBar
+      collapsed: state.collapsed,
+      toggleCollapsed: state.toggleCollapsed,
     }))
   )
 
@@ -37,11 +35,7 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
    * @param collapsed
    */
   const handleSideBarChange = (collapsed: boolean) => {
-    if (collapsed) {
-      showSideBar()
-    } else {
-      hideSideBar()
-    }
+    toggleCollapsed(collapsed)
   }
 
   return (
