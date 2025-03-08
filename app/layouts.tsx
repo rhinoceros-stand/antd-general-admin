@@ -2,19 +2,22 @@ import React from 'react'
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  MessageOutlined,
+  PoweroffOutlined,
+  SettingOutlined,
   UploadOutlined,
   UserOutlined,
-  VideoCameraOutlined,
+  VideoCameraOutlined
 } from '@ant-design/icons'
-import { 
-  Avatar, 
-  Button, 
+import {
+  Avatar,
+  Button,
   Dropdown,
-  Layout, 
-  Menu, 
+  Layout,
+  Menu,
   theme
- } from 'antd'
-import type { MenuProps } from 'antd';
+} from 'antd'
+import type { MenuProps } from 'antd'
 import { useShallow } from 'zustand/react/shallow'
 import { useAppStore } from './store'
 
@@ -30,31 +33,34 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
 
   const {
     collapsed,
-    toggleCollapsed,
+    toggleCollapsed
   } = useAppStore(
     useShallow((state) => ({
       collapsed: state.collapsed,
-      toggleCollapsed: state.toggleCollapsed,
+      toggleCollapsed: state.toggleCollapsed
     }))
   )
 
   const items: MenuProps['items'] = [
     {
-      key: '2',
-      label:'消息中心',
+      key: 'message',
+      label: '消息中心',
+      icon: <MessageOutlined />
     },
     {
-      type: 'divider',
-    },
-    {
-      key: '3',
+      key: 'settings',
       label: '系统设置',
+      icon: <SettingOutlined />
     },
     {
-      key: '4',
+      type: 'divider'
+    },
+    {
+      key: 'logout',
       danger: true,
       label: '退出登录',
-    },
+      icon: <PoweroffOutlined />
+    }
   ]
 
   /**
@@ -70,8 +76,9 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
       <Layout className='h-screen'>
         <Sider
           collapsible
-          trigger={null}
           collapsed={collapsed}
+          trigger={null}
+          width={260}
         >
           <div className='h-[32px] m-[16px] bg-stone-600 rounded-md' />
           <Menu
@@ -98,7 +105,7 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
           />
         </Sider>
         <Layout>
-          <Header 
+          <Header
             className='flex justify-between'
             style={{ padding: 0, background: colorBgContainer }}
           >
@@ -114,11 +121,11 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
                 }}
               />
             </div>
-            <div className='px-8'>
+            <div className='mx-8 flex items-center'>
               <Dropdown menu={{ items }}>
-                <div className='flex items-center justify-center'>
+                <div className='flex items-center justify-center p-2 rounded-md hover:bg-gray-500/50'>
                   <Avatar />
-                  <div className='pl-4'>Username</div>
+                  <div className='pl-4 h-[16px] leading-none'>Username</div>
                 </div>
               </Dropdown>
             </div>
@@ -131,7 +138,7 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
               borderRadius: borderRadiusLG
             }}
           >
-            Content
+            {children}
           </Content>
         </Layout>
       </Layout>
