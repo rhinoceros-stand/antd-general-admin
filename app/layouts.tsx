@@ -131,12 +131,7 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
             </div>
           </Header>
           <Content
-            style={{
-              margin: '24px 16px',
-              padding: 24,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG
-            }}
+            className='my-6 mx-8'
           >
             {children}
           </Content>
