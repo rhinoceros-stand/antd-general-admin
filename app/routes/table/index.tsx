@@ -275,7 +275,7 @@ const TablePage: React.FC = () => {
 
   return (
     <div>
-      <div className='bg-white p-4'>
+      <div className='bg-white px-6 py-4 my-4'>
         <Form
           form={form}
           onValuesChange={onFormUpdate}
@@ -324,10 +324,24 @@ const TablePage: React.FC = () => {
           </Row>
         </Form>
       </div>
-      <Table<DataType>
-        columns={columns}
-        dataSource={data}
-      />
+      <div className='px-6 py-4 bg-white'>
+
+        <Row className='mb-4'>
+          <Col span={12}>
+            <div className='flex'>
+              <Button type='primary'>新建</Button>
+              <Button className='mx-2' type='primary' danger>删除</Button>
+            </div>
+          </Col>
+          <Col className='text-right' span={12}>
+            <Button>刷新</Button>
+          </Col>
+        </Row>
+        <Table<DataType>
+          columns={columns}
+          dataSource={data}
+        />
+      </div>
     </div>
   )
 }
