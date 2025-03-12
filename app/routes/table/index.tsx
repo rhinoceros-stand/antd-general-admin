@@ -1,5 +1,16 @@
-import React from 'react'
-import { Space, Table, type TableProps, Tag } from 'antd'
+import React, { useState } from 'react'
+import { DownOutlined, UpOutlined } from '@ant-design/icons'
+import {
+  Button,
+  Form,
+  Input,
+  Space,
+  Table,
+  type TableProps,
+  Tag,
+  Row,
+  Col
+} from 'antd'
 import type { Route } from './+types/home'
 
 const TablePage: React.FC = () => {
@@ -10,6 +21,9 @@ const TablePage: React.FC = () => {
     address: string;
     tags: string[];
   }
+
+  const [collapsed, setCollapsed] = useState(false)
+  const [form] = Form.useForm()
 
   const columns: TableProps<DataType>['columns'] = [
     {
@@ -252,8 +266,64 @@ const TablePage: React.FC = () => {
     }
   ]
 
+  /**
+   *
+   * @param values
+   */
+  const onFormUpdate = (values) => {
+  }
+
   return (
     <div>
+      <div className='bg-white p-4'>
+        <Form
+          form={form}
+          onValuesChange={onFormUpdate}
+        >
+          <Row gutter={16}>
+            <Col className='gutter-row' span={6}>
+              <Form.Item label='Form Layout' name='layout'>
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col className='gutter-row' span={6}>
+              <Form.Item label='Field A'>
+                <Input placeholder='input placeholder' />
+              </Form.Item>
+            </Col>
+            <Col className='gutter-row' span={6}>
+              <Form.Item label='Field B'>
+                <Input placeholder='input placeholder' />
+              </Form.Item>
+            </Col>
+            <Col className='gutter-row' span={6}>
+
+            </Col>
+          </Row>
+          <Row gutter={16} justify='end'>
+            <Col className='text-right' span={6}>
+              <Button
+                className='mx-2'
+                type='default'
+              >
+                重置
+              </Button>
+              <Button
+                type='primary'
+              >
+                查询
+              </Button>
+              <Button
+                type='link'
+                onClick={() => setCollapsed(!collapsed)}
+              >
+                {collapsed ? '收起' : '展开'}
+                {collapsed ? <UpOutlined /> : <DownOutlined />}
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </div>
       <Table<DataType>
         columns={columns}
         dataSource={data}
