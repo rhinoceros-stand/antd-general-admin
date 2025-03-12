@@ -33,7 +33,7 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  console.log(location)
+  const { pathname } = location
 
   const {
     collapsed,
@@ -83,11 +83,24 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
     navigate('/table')
   }
 
+  /**
+   * 获取选中路径
+   * @param path
+   */
+  const getCurrentPathKeys = (path: string) => {
+    return path.split('/').filter(item => item)
+  }
+
+  /**
+   * 展示菜单
+   * @param dataList
+   */
   const renderMenus = (dataList) => {
     return dataList.map(item => ({
       key: item.key,
-      label: item.key,
-      children: item.children?.length > 0 ? renderMenus(item.children) : null
+      label: item.label || item.key,
+      children: item.children?.length > 0 ? renderMenus(item.children) : null,
+      icon: item.icon
     }))
   }
 
@@ -104,7 +117,7 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
           <Menu
             theme='dark'
             mode='inline'
-            defaultSelectedKeys={['1']}
+            selectedKeys={getCurrentPathKeys(pathname)}
             items={renderMenus(menus)}
             onSelect={({ key }) => handleMenuSelect(key)}
           />
