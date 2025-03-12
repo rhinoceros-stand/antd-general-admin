@@ -8,6 +8,7 @@ import {
   ScrollRestoration
 } from 'react-router'
 import Layouts from './layouts'
+import NotFoundPage from './NotFound'
 import type { Route } from './+types/root'
 import './app.css'
 
@@ -43,6 +44,14 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let stack: string | undefined
 
   if (isRouteErrorResponse(error)) {
+    if (error.status === 404) {
+      return (
+        <Layouts>
+          <NotFoundPage />
+        </Layouts>
+      )
+    }
+
     message = error.status === 404 ? '404' : 'Error'
     details =
       error.status === 404
