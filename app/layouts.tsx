@@ -1,11 +1,11 @@
 import React from 'react'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   MessageOutlined,
   PoweroffOutlined,
-  SettingOutlined,
+  SettingOutlined
 } from '@ant-design/icons'
 import {
   Avatar,
@@ -31,6 +31,9 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
   } = theme.useToken()
 
   const navigate = useNavigate()
+  const location = useLocation()
+
+  console.log(location)
 
   const {
     collapsed,
@@ -84,7 +87,7 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
     return dataList.map(item => ({
       key: item.key,
       label: item.key,
-      children: Array.isArray(item.children) ? renderMenus(item.children) : null
+      children: item.children?.length > 0 ? renderMenus(item.children) : null
     }))
   }
 
@@ -132,9 +135,7 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
               </Dropdown>
             </div>
           </Header>
-          <Content
-            className='my-6 mx-8'
-          >
+          <Content className='my-6 mx-8'>
             {children}
           </Content>
         </Layout>
