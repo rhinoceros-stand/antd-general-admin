@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router'
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -30,6 +31,8 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
       borderRadiusLG
     }
   } = theme.useToken()
+
+  const navigate = useNavigate()
 
   const {
     collapsed,
@@ -71,6 +74,14 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
     toggleCollapsed(collapsed)
   }
 
+  /**
+   * 
+   * @param key 
+   */
+  const handleMenuSelect=(key:string)=>{
+    navigate('/table')
+  }
+
   return (
     <div className='w-screen h-screen'>
       <Layout className='h-screen'>
@@ -102,6 +113,7 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
                 label: 'nav 3'
               }
             ]}
+            onSelect={({key})=>handleMenuSelect(key)}
           />
         </Sider>
         <Layout>
