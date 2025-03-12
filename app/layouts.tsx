@@ -6,9 +6,6 @@ import {
   MessageOutlined,
   PoweroffOutlined,
   SettingOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined
 } from '@ant-design/icons'
 import {
   Avatar,
@@ -21,6 +18,7 @@ import {
 import type { MenuProps } from 'antd'
 import { useShallow } from 'zustand/react/shallow'
 import { useAppStore } from './store'
+import menus from './config/menus'
 
 const { Header, Sider, Content } = Layout
 
@@ -75,11 +73,19 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
   }
 
   /**
-   * 
-   * @param key 
+   *
+   * @param key
    */
-  const handleMenuSelect=(key:string)=>{
+  const handleMenuSelect = (key: string) => {
     navigate('/table')
+  }
+
+  const renderMenus = (dataList) => {
+    return dataList.map(item => ({
+      key: item.key,
+      label: item.key,
+      children: Array.isArray(item.children) ? renderMenus(item.children) : null
+    }))
   }
 
   return (
@@ -96,24 +102,8 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
             theme='dark'
             mode='inline'
             defaultSelectedKeys={['1']}
-            items={[
-              {
-                key: '1',
-                icon: <UserOutlined />,
-                label: 'nav 1'
-              },
-              {
-                key: '2',
-                icon: <VideoCameraOutlined />,
-                label: 'nav 2'
-              },
-              {
-                key: '3',
-                icon: <UploadOutlined />,
-                label: 'nav 3'
-              }
-            ]}
-            onSelect={({key})=>handleMenuSelect(key)}
+            items={renderMenus(menus)}
+            onSelect={({ key }) => handleMenuSelect(key)}
           />
         </Sider>
         <Layout>
