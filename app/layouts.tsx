@@ -80,7 +80,8 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
    * @param key
    */
   const handleMenuSelect = (key: string) => {
-    navigate('/table')
+    const path = key.split('.').filter(el => el).join('/')
+    navigate(path)
   }
 
   /**
@@ -95,11 +96,11 @@ const Layouts = ({ children }: { children: React.ReactNode }) => {
    * 展示菜单
    * @param dataList
    */
-  const renderMenus = (dataList) => {
+  const renderMenus = (dataList, parent?) => {
     return dataList.map(item => ({
-      key: item.key,
+      key: [parent?.key, item.key].filter(el => el).join('.'),
       label: item.label || item.key,
-      children: item.children?.length > 0 ? renderMenus(item.children) : null,
+      children: item.children?.length > 0 ? renderMenus(item.children, item) : null,
       icon: item.icon
     }))
   }
