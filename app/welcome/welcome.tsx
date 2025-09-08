@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button"
 import logoDark from "./logo-dark.svg";
 import logoLight from "./logo-light.svg";
 
@@ -17,6 +18,9 @@ export function Welcome() {
               alt="React Router"
               className="hidden w-full dark:block"
             />
+          </div>
+          <div className="flex min-h-svh flex-col items-center justify-center">
+            <Button>Click me</Button>
           </div>
         </header>
         <div className="max-w-[300px] w-full space-y-6 px-4">

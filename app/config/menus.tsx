@@ -1,19 +1,17 @@
-import { HomeOutlined, LayoutOutlined, SettingOutlined } from '@ant-design/icons'
-
 export default [
   {
     key: 'dashboard',
-    icon: <HomeOutlined />,
+    icon: '',
     label: '工作台'
   },
   {
     key: 'table',
-    icon: <HomeOutlined />,
+    icon: '',
     label: '搜索表格'
   },
   {
     key: 'system',
-    icon: <SettingOutlined />,
+    icon: '',
     label: '系统管理',
     children: [
       {
@@ -29,7 +27,7 @@ export default [
   },
   {
     key: 'settings',
-    icon: <LayoutOutlined />,
+    icon: '',
     label: '系统设置',
     children: []
   }

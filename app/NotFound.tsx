@@ -1,18 +1,8 @@
-import { Button, Result } from 'antd'
 import React from 'react'
 import { redirect } from 'react-router'
 
 const NoFoundPage: React.FC = () => (
-  <Result
-    status='404'
-    title='404'
-    subTitle='抱歉, 你访问的页面不存在.'
-    extra={
-      <Button type='primary' onClick={() => redirect('/')}>
-        返回首页
-      </Button>
-    }
-  />
+  <div>404 Not Found</div>
 )
 
 export default NoFoundPage
